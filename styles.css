@@ -1,0 +1,372 @@
+/* ==========================================================================
+   CAULABS | IMPRESSÃO 3D — LINK-IN-BIO CLEAN + PALCO 3D WEBGL
+   --------------------------------------------------------------------------
+   Paleta Oficial:
+   - Grafite Noturno: #0D0A12 (Fundo principal)
+   - Branco PLA:      #FFFFFF (Símbolo e títulos)
+   - Névoa:           #ECEBEF (Textos claros)
+   - Aço:             #B9B7BF (Subtítulos e divisórias)
+   - Lilás Seda:      #A796FF (Filamento vivo e detalhes)
+   - Gradiente Seda:  #5B43DB -> #A796FF -> #F6F2FF
+   ========================================================================== */
+
+:root {
+  --grafite: #0D0A12;
+  --grafite-card: rgba(20, 16, 29, 0.72);
+  --grafite-hover: rgba(29, 23, 44, 0.9);
+  --branco-pla: #FFFFFF;
+  --nevoa: #ECEBEF;
+  --aco: #B9B7BF;
+  --aco-border: rgba(185, 183, 191, 0.13);
+  --lilas-seda: #A796FF;
+  --seda-deep: #5B43DB;
+  --seda-pearl: #F6F2FF;
+
+  --font-display: 'Michroma', sans-serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: var(--grafite);
+  color: var(--branco-pla);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ==========================================================================
+   FUNDO AMBIENTE & FILAMENTO VIVO
+   ========================================================================== */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.radial-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(95px);
+}
+
+.glow-left {
+  width: 480px;
+  height: 480px;
+  top: 46%;
+  left: 34%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(91, 67, 219, 0.14) 0%, rgba(167, 150, 255, 0.04) 55%, transparent 75%);
+}
+
+.glow-right {
+  width: 560px;
+  height: 560px;
+  top: 50%;
+  left: 68%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(91, 67, 219, 0.22) 0%, rgba(167, 150, 255, 0.07) 52%, transparent 76%);
+}
+
+.filamento-vivo {
+  position: absolute;
+  left: 50%;
+  bottom: 2%;
+  transform: translateX(-50%);
+  width: 100%;
+  min-width: 960px;
+  height: 230px;
+  opacity: 0.65;
+}
+
+.filament-path {
+  animation: filamentFloat 12s ease-in-out infinite alternate;
+}
+
+.fp-2 { animation-delay: -2s; }
+.fp-3 { animation-delay: -4s; }
+
+@keyframes filamentFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+/* ==========================================================================
+   LAYOUT CLEAN: BIO + PALCO 3D
+   ========================================================================== */
+
+.studio-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1040px;
+  padding: 36px 24px;
+  display: grid;
+  grid-template-columns: minmax(320px, 410px) minmax(340px, 500px);
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.bio-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* ==========================================================================
+   CABEÇALHO COM A LOGO ORIGINAL DO MANUAL
+   ========================================================================== */
+
+.brand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar-badge {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #211738 0%, #110D1B 64%, #0D0A12 100%);
+  border: 1.5px solid rgba(167, 150, 255, 0.32);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(91, 67, 219, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-monogram {
+  width: 48px;
+  height: 48px;
+  display: block;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-weight: 400;
+  letter-spacing: 0.24em;
+  padding-left: 0.24em;
+  color: var(--branco-pla);
+  margin-bottom: 4px;
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  padding-left: 0.34em;
+  color: var(--aco);
+  margin-bottom: 10px;
+}
+
+.brand-tagline {
+  font-weight: 300;
+  font-size: 0.92rem;
+  color: var(--lilas-seda);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   LISTA DE LINKS (4 CANAIS)
+   ========================================================================== */
+
+.links-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  border-radius: 16px;
+  background: var(--grafite-card);
+  border: 1px solid var(--aco-border);
+  color: var(--branco-pla);
+  text-decoration: none;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    transform 0.25s var(--transition-smooth),
+    border-color 0.25s var(--transition-smooth),
+    background-color 0.25s var(--transition-smooth),
+    box-shadow 0.25s var(--transition-smooth);
+}
+
+.link-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    260px circle at var(--mouse-x) var(--mouse-y),
+    rgba(167, 150, 255, 0.14),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.link-card:hover {
+  border-color: rgba(167, 150, 255, 0.5);
+  background: var(--grafite-hover);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 22px rgba(91, 67, 219, 0.16);
+  transform: translateY(-2px);
+}
+
+.link-card:hover::before {
+  opacity: 1;
+}
+
+.link-icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--branco-pla);
+  transition: all 0.25s var(--transition-smooth);
+  position: relative;
+  z-index: 1;
+}
+
+.link-card:hover .link-icon-wrap {
+  color: var(--lilas-seda);
+  border-color: rgba(167, 150, 255, 0.42);
+  background: rgba(167, 150, 255, 0.1);
+}
+
+.link-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.link-title {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--branco-pla);
+}
+
+.link-desc {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--aco);
+}
+
+.link-arrow {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--aco);
+  transition: all 0.25s var(--transition-smooth);
+  position: relative;
+  z-index: 1;
+}
+
+.link-card:hover .link-arrow {
+  color: var(--grafite);
+  background: var(--lilas-seda);
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   PALCO 3D WEBGL (IMPRESSORA 3D COREXY CRIANDO ESCULTURA SEDA)
+   ========================================================================== */
+
+.printer-stage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.printer-viewport {
+  width: 100%;
+  height: 490px;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.printer-viewport:active {
+  cursor: grabbing;
+}
+
+.printer-viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE & TABLET)
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .studio-layout {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    padding: 28px 18px 40px;
+    gap: 18px;
+  }
+
+  .printer-viewport {
+    height: 340px;
+  }
+
+  .glow-left,
+  .glow-right {
+    left: 50%;
+  }
+}
